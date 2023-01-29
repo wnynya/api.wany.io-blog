@@ -13,6 +13,10 @@ MySQLClient.setDefaultClient(new MySQLClient(config.database));
 import auth from '@wnynya/auth';
 auth.setMySQLClient(MySQLClient.getDefaultClient());
 
+/* Blog */
+import blog from '@wnynya/blog';
+blog.setMySQLClient(MySQLClient.getDefaultClient());
+
 import express from './express.mjs';
 
 import http from 'http';
