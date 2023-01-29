@@ -1,0 +1,17 @@
+name: Checkout_
+on: push
+jobs:
+  checkout:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions/checkout@master
+        with:
+          repository: wnynya/Wanyne-API-config
+          token: ${{ secrets.CONFIG_TOKEN }}
+          path: './config'
+
+      - run: npm install
+
+      - run: ./start.sh

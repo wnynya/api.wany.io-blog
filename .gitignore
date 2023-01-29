@@ -1,0 +1,7 @@
+/node_modules
+/logs
+/data
+/src/public/temp
+/config
+/deprecated
+/package-lock.json
