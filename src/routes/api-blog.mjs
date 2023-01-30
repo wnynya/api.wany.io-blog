@@ -100,7 +100,9 @@ router.all('/articles/:aid*', internal(), (req, res, next) => {
       req.p.article = article;
       next();
     })
-    .catch(res.error);
+    .catch(() => {
+      res.error('default404');
+    });
 });
 
 /**
@@ -162,7 +164,7 @@ router.patch(
 
 /**
  * @todo
- * @desc 계정 제거
+ * @desc 게시글 제거
  * @permission others: blog.articles.article.delete
  */
 router.delete(
