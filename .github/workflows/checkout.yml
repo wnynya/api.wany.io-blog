@@ -12,6 +12,8 @@ jobs:
           token: ${{ secrets.CONFIG_TOKEN }}
           path: './config'
 
+      - run: npm cache clean --force
+
       - run: npm install
 
       - run: ./start.sh
