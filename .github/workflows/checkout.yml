@@ -1,4 +1,4 @@
-name: Checkout_
+name: Checkout
 on: push
 jobs:
   checkout:
