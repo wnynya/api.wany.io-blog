@@ -1,0 +1,36 @@
+name: Checkout and deploy
+on: push
+jobs:
+  checkout:
+    name: 'Checkout'
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: 'main'
+
+  checkout_config:
+    name: 'Checkout config'
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: 'main'
+          repository: wnynya/Wanyne-API-config
+          token: ${{ secrets.CONFIG_TOKEN }}
+          path: './config'
+
+  install_dependancy:
+    name: 'Install dependancy'
+    needs: [checkout]
+    runs-on: self-hosted
+    steps:
+      - run: npm cache verify
+      - run: npm install
+
+  deploy:
+    name: 'Deploy'
+    needs: [checkout, checkout_config, install_dependancy]
+    runs-on: self-hosted
+    steps:
+      - run: ./start.sh
