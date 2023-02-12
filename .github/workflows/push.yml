@@ -11,6 +11,7 @@ jobs:
 
   checkout_config:
     name: 'Checkout config'
+    needs: [checkout]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@master
@@ -19,6 +20,7 @@ jobs:
           repository: wnynya/Wanyne-API-config
           token: ${{ secrets.CONFIG_TOKEN }}
           path: './config'
+          clean: false
 
   install_dependancy:
     name: 'Install dependancy'
