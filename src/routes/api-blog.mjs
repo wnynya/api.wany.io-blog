@@ -1,5 +1,3 @@
-import { console } from '@wnynya/logger';
-
 import express from 'express';
 const router = express.Router();
 
@@ -7,11 +5,6 @@ import { BlogArticle, BlogComment } from '@wnynya/blog';
 
 import middlewares from '@wnynya/express-middlewares';
 const internal = middlewares.check.internal;
-/*const internal = () => {
-  return (req, res, next) => {
-    next();
-  };
-};*/
 const login = middlewares.check.login;
 const body = middlewares.check.body;
 const perm = middlewares.check.perm;
