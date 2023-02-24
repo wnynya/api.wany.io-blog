@@ -1,10 +1,4 @@
 import config from './config.mjs';
-const dev = process.argv.includes('-dev');
-config.logger.dir = dev
-  ? './logs'
-  : '/data/logs/' + process.env.npm_package_name;
-config.logger.log.dir = config.logger.dir;
-config.logger.req.dir = config.logger.dir;
 
 /* Logger (override console) */
 import Logger from '@wnynya/logger';
