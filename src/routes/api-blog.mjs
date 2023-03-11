@@ -105,7 +105,6 @@ router.all('/articles/:aid*', internal(), (req, res, next) => {
 router.get(
   '/articles/:aid',
   internal('blog.articles.article.get'),
-  login(),
   (req, res) => {
     const obj = req.p.article.toJSON();
     obj.creation2 = new Date(obj.creation).toJSON();
