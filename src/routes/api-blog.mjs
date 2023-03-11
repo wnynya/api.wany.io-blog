@@ -108,7 +108,7 @@ router.get(
   login(),
   (req, res) => {
     const obj = req.p.article.toJSON();
-    obj.creation2 = new Date(obj).toJSON();
+    obj.creation2 = new Date(obj.creation).toJSON();
     res.data(obj);
   }
 );
