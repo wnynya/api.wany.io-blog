@@ -107,7 +107,9 @@ router.get(
   internal('blog.articles.article.get'),
   login(),
   (req, res) => {
-    res.data(req.p.article.toJSON());
+    const obj = req.p.article.toJSON();
+    obj.creation2 = new Date(obj).toJSON();
+    res.data(obj);
   }
 );
 
