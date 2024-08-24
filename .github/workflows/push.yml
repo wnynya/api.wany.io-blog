@@ -1,20 +1,25 @@
 name: Checkout and deploy
-on: push
+on:
+  push:
+    branches: [main, github-actions]
+
 jobs:
   checkout:
     name: 'Checkout'
-    runs-on: self-hosted
+    runs-on:
+      labels: [self-hosted, sangsu]
     steps:
       - uses: actions/checkout@master
         with:
-          ref: 'main'
+          ref: ${{ github.ref }}
 
   install_dependancy:
     name: 'Install dependancy'
     needs: [checkout]
-    runs-on: self-hosted
+    runs-on:
+      labels: [self-hosted, sangsu]
     steps:
-      - uses: actions/cache@v3
+      - uses: actions/cache@master
         with:
           path: node_modules
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
@@ -26,12 +31,13 @@ jobs:
   checkout_config:
     name: 'Checkout config'
     needs: [checkout]
-    runs-on: self-hosted
+    runs-on:
+      labels: [self-hosted, sangsu]
     steps:
       - uses: actions/checkout@master
         with:
           ref: 'main'
-          repository: wnynya/Wanyne-API-config
+          repository: wnynya/api.wany.io-config
           token: ${{ secrets.CONFIG_TOKEN }}
           path: './config'
           clean: false
@@ -39,6 +45,8 @@ jobs:
   deploy:
     name: 'Deploy'
     needs: [checkout, checkout_config, install_dependancy]
-    runs-on: self-hosted
+    runs-on:
+      labels: [self-hosted, sangsu]
     steps:
-      - run: ./start.sh
+      - run: chmod 777 ./start.sh
+      - run: RUNNER_TRACKING_ID="" && ./start.sh
